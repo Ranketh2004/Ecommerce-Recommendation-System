@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* General Styling */
+        body {
+          background-color: gainsboro;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+        }
+
+        /* Header Styling */
+        .header {
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            z-index: 1000;
+        }
+        .logo a {
+            color: white;
+            font-size: 17px;
+            text-decoration: none;
+        }
+        .nav-items {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-items a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .right-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+         
+        .user-icon {
+            color: white;
+        }
+        .contact-btn {
+            background-color: #007bff;
+            color: #000000;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+         
+        /* Form Section Styling */
+.form-container {
+    background-color: #343a40;
+    color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 500px; /* Increased width */
+    min-height: 500px; /* Increased height */
+    max-width: 90%; /* Ensure responsiveness on small screens */
+    box-sizing: border-box; /* Make padding part of the total width/height */
+}
+
+        .main-content {
+            flex: 1; /* Allows the form section to expand */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 80px; /* Avoid overlap with header */
+            padding-bottom: 20px;
+        }
+
+        /* Footer Styling */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+        }
+        .footer address,
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="logo">
+        <a href="#">Insight Architects</a>
+    </div>
+    <nav class="nav-items">
+        <a href="#">Home</a> 
+        
+        <a href="{{ url_for('signin') }}">Sign In</a>
+        <a href="{{ url_for('signup') }}">Sign Up</a>
+    </nav>
+    <div class="right-section">
+        
+        <a href="#">
+            <button type="button" class="contact-btn">Contact Us ↗</button>
+        </a>
+    </div>
+</header>
+
+    <div class="main-content">
+    <div class="form-container">
+                <h1 class="text-center mt-5">Sign In</h1>
+                <form action="{{ url_for('signin') }}" method="POST">
+                    <div class="form-group">
+                        <label for="email">Email Address:</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                </form>
+                <div class="text-center mt-3">
+                    <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign Up</a></p>
+                </div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} mt-3">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+    
+  <!--footer-->
+  <footer class="footer bg-dark text-white" style="margin-top:300px;">
+    <div class="container" style="padding-top:20px;">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <h5>About Us</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pretium risus quis urna maximus, eget vestibulum risus vestibulum.</p>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <h5>Support</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <h5>Contact Us</h5>
+                <address>
+                    <strong>Company Name</strong><br>
+                    123 Street, City<br>
+                    Country<br>
+                    <i class="fas fa-phone"></i> Phone: +1234567890<br>
+                    <i class="fas fa-envelope"></i> Email: info@example.com
+                </address>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <hr class="bg-light">
+                <p class="text-center">© 2024 Ecommerce Recommendation System. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ 
+</body>
+</html>

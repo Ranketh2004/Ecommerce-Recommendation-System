@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* General Styling */
+        body {
+          background-color: gainsboro;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+        }
+
+        /* Header Styling */
+        .header {
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            z-index: 1000;
+        }
+        .logo a {
+            color: white;
+            font-size: 17px;
+            text-decoration: none;
+        }
+        .nav-items {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-items a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .right-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+         
+        .user-icon {
+            color: white;
+        }
+        .contact-btn {
+            background-color:  #007bff;
+            color: #000000;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+         
+        /* Form Section Styling */
+ 
+
+        .main-content {
+            flex: 1; /* Allows the form section to expand */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 80px; /* Avoid overlap with header */
+            padding-bottom: 20px;
+        }
+
+        /* Footer Styling */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+        }
+        .footer address,
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+        /* Container to center the form */
+
+ 
+
+/* Styling the form elements */
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+   
+    color: black;
+}
+
+/* Checkbox styles */
+.checkbox-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: #f1f1f1;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Button styling */
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Blue button */
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Text alignment and margins */
+h1 {
+    text-align: center;
+    color: #fff;
+}
+
+.text-center {
+    text-align: center;
+    color: #fff;
+}
+
+.mt-3 {
+    margin-top: 20px;
+}
+
+.alert {
+    text-align: center;
+    padding: 10px;
+    border-radius: 4px;
+}
+.Sign{
+    background-color: #343a40; /* Black background */
+    color: white; /* White text */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 700px;
+    max-width: 90%;
+    margin: 0 auto; /* Center the form horizontally */
+    margin-top: 100px; /* Space from the top */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+        
+
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="logo">
+        <a href="#">Insight Architects</a>
+    </div>
+    <nav class="nav-items">
+        <a href="#">Home</a>
+         
+        <a href="{{ url_for('signin') }}">Sign In</a>
+        <a href="{{ url_for('signup') }}">Sign Up</a>
+    </nav>
+    <div class="right-section">
+        
+        <a href="#">
+            <button type="button" class="contact-btn">Contact Us ↗</button>
+        </a>
+    </div>
+</header> 
+
+
+
+   
+    <div class="Sign">
+        <h1>Sign Up</h1>
+        <form action="{{ url_for('signup') }}" method="POST">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Enter Full Name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email Address" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" required>
+            </div>
+
+            <!-- Categories Checkbox Group -->
+            <div class="form-group">
+                <label for="categories">Categories You Like:</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="categories" value="beauty"> beauty</label>
+                    <label><input type="checkbox" name="categories" value="makeup"> makeup</label>
+                    <label><input type="checkbox" name="categories" value="hair"> hair</label>
+                    <label><input type="checkbox" name="categories" value="nails"> nails</label>
+                    <label><input type="checkbox" name="categories" value="body"> body</label>
+                </div>
+            </div>
+
+            <!-- Brands Checkbox Group -->
+            <div class="form-group">
+                <label for="brands">Brands You Like:</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="brands" value="opi"> OPI</label>
+                    <label><input type="checkbox" name="brands" value="clairol"> Clairol</label>
+                    <label><input type="checkbox" name="brands" value="paris"> Paris</label>
+                    <label><input type="checkbox" name="brands" value="colgate"> Colgate</label>
+                    <label><input type="checkbox" name="brands" value="vaseline"> Vaseline</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+        </form>
+        <div class="text-center mt-3">
+            <p>Already have an account? <a href="{{ url_for('signin') }}">Sign In</a></p>
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} mt-3">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+
+ <!--footer-->
+ <footer class="footer bg-dark text-white" style="margin-top:300px;">
+    <div class="container" style="padding-top:20px;">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <h5>About Us</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pretium risus quis urna maximus, eget vestibulum risus vestibulum.</p>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <h5>Support</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <h5>Contact Us</h5>
+                <address>
+                    <strong>Company Name</strong><br>
+                    123 Street, City<br>
+                    Country<br>
+                    <i class="fas fa-phone"></i> Phone: +1234567890<br>
+                    <i class="fas fa-envelope"></i> Email: info@example.com
+                </address>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <hr class="bg-light">
+                <p class="text-center">© 2024 Ecommerce Recommendation System. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ 
+</body>
+</html>

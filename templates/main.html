@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendation System</title>
+    <style>
+         body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+    }
+
+    /* Container for the whole page */
+    .container {
+        width: 1100px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Headings */
+    h1 {
+        text-align: center;
+    }
+
+    /* Form Container Styles */
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    margin-top: 20px;
+}
+
+/* Form Group Styling */
+.form-group {
+    margin-bottom: 20px; /* Added space between input fields */
+}
+
+label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333; /* Darker label color */
+    margin-bottom: 8px;
+    display: block;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #fff; /* White input background */
+    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Input Focus Effect */
+input:focus {
+    border-color: #007bff; /* Blue border on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light blue glow */
+    outline: none;
+}
+
+/* Button Styles */
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #007bff; /* Primary blue color */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    width: 100%; /* Full width for better appearance */
+}
+
+/* Button Hover Effect */
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Button Active Effect */
+button:active {
+    background-color: #004080;
+    transform: scale(0.98); /* Slightly reduce size on click */
+}
+
+/* Responsive Styling for Mobile */
+@media (max-width: 768px) {
+    .form-container {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%; /* Ensure button takes full width on smaller screens */
+    }
+}
+
+    /* User info box */
+    .user-info {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 8px;
+        margin-left: 20px;
+        width: 200px;
+        text-align: center;
+    }
+
+    /* Card container */
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    /* Individual cards */
+    .card {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: calc(33.333% - 20px); /* Three cards in one row */
+        height: 30rem; /* Fixed height */
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* Card images */
+    .card img {
+        width: 100%;
+        height: 15rem; /* Fixed height for images */
+        object-fit: cover; /* Ensures the image covers the area */
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Card content (title, brand, etc.) */
+    .card h3 {
+        margin: 10px 0;
+        font-size: 18px;
+    }
+
+    .card p {
+        color: #555;
+    }
+
+    .user-info {
+    background-color: #ffffff; /* White background */
+    border: 2px solid #007bff; /* Border with a primary blue color */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    text-align: center; /* Center text */
+    width: 100px; /* Adjusted width for better appearance */
+    margin-top: 20px;
+     margin-left: 50px;
+    font-family: 'Arial', sans-serif;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Adding hover effect for a subtle interaction */
+.user-info:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Styling for the username or login message */
+.user-info h3 {
+    font-size: 18px;
+    color: #007bff; /* Blue color for the welcome message */
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+/* Add a subtle divider for better spacing */
+.user-info::after {
+    content: '';
+    display: block;
+    margin: 10px auto;
+    width: 80%;
+    height: 1px;
+    background-color: #ddd;
+}
+/* Style for Sign Up and Logout buttons */
+.auth-btn {
+    background-color: #007bff; /* Primary blue background */
+    color: white; /* White text color */
+    padding: 10px 20px; /* Padding for the button */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor for button interaction */
+    text-decoration: none; /* Remove underline from links */
+    border-radius: 6px; /* Rounded corners */
+    transition: background-color 0.3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+/* Hover effect */
+.auth-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Active state */
+.auth-btn:active {
+    background-color: #004080; /* Even darker blue when clicked */
+    transform: scale(0.98); /* Slight shrink effect on click */
+}
+
+
+</style>
+</head>
+<body>
+  
+
+
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            <!-- <a href="{{ url_for('signup') }}" class="auth-btn">Sign Up</a> -->
+            {% if username %}
+                <a href="{{ url_for('logout') }}" class="auth-btn" style="margin-left: auto;">Logout</a>
+            {% endif %}
+        </div>
+        <h1>Product Recommendation System</h1>
+        <div class="form-container">
+            <!-- Form Section for Content-Based Recommendation -->
+            <form action="/content" method="POST" style="flex-grow: 1;">
+                <div class="form-group">
+                    <label for="item">Item Name:</label>
+                    <input type="text" id="item" name="item" required>
+                </div>
+                <div class="form-group">
+                    <label for="nbr">Number of Recommendations:</label>
+                    <input type="number" id="nbr" name="nbr">
+                </div>
+                <button type="submit">Get Recommendations</button>
+            </form>
+
+            <!-- User Info Section -->
+            <div class="user-info">
+                {% if username %}
+                    <h3>Welcome, {{ username }}!</h3>
+                {% else %}
+                    <h3>User not logged in</h3>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- "For You" Recommendations Section (Old Users) -->
+        {% if user_recommendations %}
+            <h2>For You</h2>
+            <div class="card-container">
+                {% for product in user_recommendations %}
+                    <div class="card">
+                        <img src="{{ product['ImageURL'] }}" alt="Product Image">
+                        <h3>{{ product['Name'] }}</h3>
+                        <p>Brand: {{ product['Brand'] }}</p>
+                        <p>Rating: {{ product['Rating'] }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- "Trending Products" Section (Old Users) -->
+        {% if user_recommendations and trending_products %}
+            <h2>Trending Products</h2>
+            <div class="card-container">
+                {% for product in trending_products %}
+                    <div class="card">
+                        <img src="{{ product['ImageURL'] }}" alt="Product Image">
+                        <h3>{{ product['Name'] }}</h3>
+                        <p>Brand: {{ product['Brand'] }}</p>
+                        <p>Rating: {{ product['Rating'] }}</p>
+                        <p>Reviews: {{ product['ReviewCount'] }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- "Products You May Like" Section (New Users) -->
+        {% if new_user_recommendations %}
+            <h2>Products You May Like</h2>
+            <div class="card-container">
+                {% for product in new_user_recommendations %}
+                    <div class="card">
+                        <img src="{{ product['ImageURL'] }}" alt="Product Image">
+                        <h3>{{ product['Name'] }}</h3>
+                        <p>Brand: {{ product['Brand'] }}</p>
+                        <p>Rating: {{ product['Rating'] }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- "Trending Products" Section (New Users) -->
+        {% if new_user_recommendations and trending_products %}
+            <h2>Trending Products</h2>
+            <div class="card-container">
+                {% for product in trending_products %}
+                    <div class="card">
+                        <img src="{{ product['ImageURL'] }}" alt="Product Image">
+                        <h3>{{ product['Name'] }}</h3>
+                        <p>Brand: {{ product['Brand'] }}</p>
+                        <p>Rating: {{ product['Rating'] }}</p>
+                        <p>Reviews: {{ product['ReviewCount'] }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Content-Based Recommendations Section -->
+        {% if recommendation %}
+            <h2>Content-Based Recommended Products</h2>
+            <div class="card-container">
+                {% for product in recommendation %}
+                    <div class="card">
+                        <img src="{{ product['ImageURL'] }}" alt="Product Image">
+                        <h3>{{ product['Name'] }}</h3>
+                        <p>Brand: {{ product['Brand'] }}</p>
+                        <p>Rating: {{ product['Rating'] }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+ 
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ 
+</body>
+</html>
